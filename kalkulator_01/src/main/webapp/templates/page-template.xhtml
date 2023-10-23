@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/main-template.xhtml">
+
+	<ui:define name="title">
+		Kalkulator kredytowy
+	</ui:define>
+
+	<ui:define name="content">
+
+		<p:panel header="Infomacje" styleClass="bottom-space">
+		Kwota kredytu minimum 20 000 zł<br/>
+		Kwota kredytu maximum 20 000 zł<br/>
+		Okres spłaty minimum 12 miesiecy<br/>
+		Okres spłaty naximum 420 miesiące <br/>
+		Wysokość oprocentowania minimum 2%<br/>
+		Wysokość oprocentowania maximum 25%
+		
+		
+		</p:panel>
+
+		<ui:insert name="pageContent"></ui:insert>
+
+	</ui:define>
+	
+</ui:composition>
+</html>
