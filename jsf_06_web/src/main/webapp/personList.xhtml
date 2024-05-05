@@ -1,79 +1,194 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-	<meta charset="utf-8" />
-	<title>JSF 06 - EJB, bazy danych (mapowanie
-		obiektowo-relacyjne)</title>
-</h:head>
-<h:body style="background-color: #eee; margin: 0.5em;">
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
 
 	<p:panel header="Opcje wyszukiwania" toggleable="true" collapsed="true"
 		style="margin-bottom: 1em;">
+		
 		<h:form>
 			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel value="nazwisko:" />
-				<p:inputText value="#{personListBB.surname}" />
+				<h:outputLabel value="Nazwisko uzytkownika którego szukasz:" />
+				<p:inputText value="#{userListBB.nazwisko}" />
 				<p:commandButton value="Szukaj" update="form-table" />
 			</h:panelGrid>
 		</h:form>
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Marka samochodu którego szukasz:" />
+				<p:inputText value="#{lazyView.marka}" />
+				<p:commandButton value="Szukaj" update="form-table3" />
+			</h:panelGrid>
+		</h:form>
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="ID zamowienia którego szukasz:" />
+				<p:inputText value="#{zamowieniaListBB.ID_zamowienia}" />
+				<p:commandButton value="Szukaj" update="form-table1" />
+			</h:panelGrid>
+		</h:form>
+		
 	</p:panel>
+	
 
 	<p:messages />
 
-	<h:form id="form-table" style="margin-bottom:1em;">
 
-		<p:commandButton value="Dodaj nową osobę"
-			action="#{personListBB.newPerson()}" style="margin-bottom:1em;" />
 
-		<p:dataTable value="#{personListBB.list}" var="p">
+	<h:form id="form-table"  style="margin-bottom:1em;">
+
+		
+			<p:commandButton value="Dodaj nowy samochód"
+			action="#{carListBB.newCar()}" style="margin-bottom:1em;" />
+		<p:panel header="Uzytkownicy" toggleable="true" collapsed="true" style="margin-bottom: 1em;">
+		<p:dataTable value="#{userListBB.list}" var="u" >
 
 			<p:column priority="5">
 				<f:facet name="header">
-					<h:outputText value="imię" />
+					<h:outputText value="Imie" />
 				</f:facet>
-				<h:outputText value="#{p.name}" />
+				<h:outputText value="#{u.imie}" />
 			</p:column>
-
-			<p:column>
+			<p:column priority="5">
 				<f:facet name="header">
-					<h:outputText value="nazwisko" />
+					<h:outputText value="Nazwisko" />
 				</f:facet>
-				<h:outputText value="#{p.surname}" />
+				<h:outputText value="#{u.nazwisko}" />
 			</p:column>
-
-			<p:column priority="4">
+			<p:column priority="5">
 				<f:facet name="header">
-					<h:outputText value="data ur." />
+					<h:outputText value="Numer telefonu" />
 				</f:facet>
-				<h:outputText value="#{p.birthdate}">
-					<f:convertDateTime pattern="dd-MM-yyyy" />
-				</h:outputText>
+				<h:outputText value="#{u.numer_telefonu}" />
 			</p:column>
-
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Wiek" />
+				</f:facet>
+				<h:outputText value="#{u.wiek}" />
+			</p:column>
 			<p:column>
 				<f:facet name="header">
 					<h:outputText value="opcje" />
 				</f:facet>
-
-				<p:commandButton value="Edytuj"
-					action="#{personListBB.editPerson(p)}" />
-
 				<p:commandButton value="Usuń"
-					action="#{personListBB.deletePerson(p)}" update="@form" />
-
-				<p:button outcome="personEditGET" value="Edytuj (GET)">
-					<f:param name="p" value="#{p.idperson}" />
-				</p:button>
+					action="#{userListBB.deletePerson(u)}" update="@form" />
+					
 			</p:column>
 
-		</p:dataTable>
-	</h:form>
+			</p:dataTable>
+		</p:panel>
+	</h:form>	
+		<h:form id="form-table1"  style="margin-bottom:1em;">
+			<p:panel header="Zamowienia" toggleable="true" collapsed="true" style="margin-bottom: 1em;">
+		<p:dataTable value="#{zamowieniaListBB.list}" var="z" >
 
-</h:body>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="ID zamowienia" />
+				</f:facet>
+				<h:outputText value="#{z.ID_zamowienia}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Samochód" />
+				</f:facet>
+				<h:outputText value="#{z.car.marka} #{z.car.model}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Uzytkownik" />
+				</f:facet>
+				<h:outputText value="#{z.user.imie} #{z.user.nazwisko}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Od kiedy" />
+				</f:facet>
+				<h:outputText value="#{z.odKiedy}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="do kiedy" />
+				</f:facet>
+				<h:outputText value="#{z.doKiedy}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="opcje" />
+				</f:facet>
+				<p:commandButton value="Usuń"
+					action="#{zamowieniaListBB.deletePerson(z)}" update="@form" />
+					
+			</p:column>
+			
+
+		</p:dataTable>
+		</p:panel>	
+	</h:form>
+		
+	<h:form id="form-table3"  style="margin-bottom:1em;">	
+	<p:panel header="Samochody" toggleable="true" collapsed="true" style="margin-bottom: 1em;">
+		<p:dataTable  var="c"
+		 value="#{lazyView.lazycar}" paginator="true" rows="2"
+                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rowsPerPageTemplate="1,2,15" selectionMode="single" lazy="true"
+                     >
+
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Marka" />
+				</f:facet>
+				<h:outputText value="#{c.marka}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="model" />
+				</f:facet>
+				<h:outputText value="#{c.model}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="kolor" />
+				</f:facet>
+				<h:outputText value="#{c.color}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Rocznik" />
+				</f:facet>
+				<h:outputText value="#{c.rocznik}" />
+			</p:column>
+				<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Zdjęcie" />
+				</f:facet>
+				<p:graphicImage value="#{c.photoName}" width="400px" height="200px"/>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="opcje" />
+				</f:facet>
+				<p:commandButton value="Usuń"
+					action="#{carListBB.deletePerson(c)}" update="@form" />
+				<p:commandButton value="Edytuj"
+					action="#{carListBB.editCar(c)}" />
+					
+			</p:column>
+
+			
+
+		</p:dataTable>
+	</p:panel>		
+	</h:form>
+</ui:define>
+
+</ui:composition>
 </html>

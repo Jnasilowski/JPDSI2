@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent" >
+	<h:form>
+		<h:outputLabel value="Wyszukiwarka samochodów według dostępności" />
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Data początku zamówienia:"  />
+				<p:datePicker value="#{zamowieniaListBB.odkiedy}" pattern="yyyy-MM-dd"/>
+				<h:outputLabel value="Data końca zamówienia:" />
+				<p:datePicker value="#{zamowieniaListBB.dokiedy} " pattern="yyyy-MM-dd"/>
+				<p:commandButton value="Szukaj" update="form-table3" />
+			</h:panelGrid>
+		</h:form>	
+		
+	<h:form id="form-table3"  style="margin-bottom:1em;">	
+	<p:panel header="Samochody do wyboru" toggleable="true" collapsed="true" style="margin-bottom: 1em;">
+		<p:dataTable value="#{zamowieniaListBB.listB()}" var="c">
+			
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Marka" />
+				</f:facet>
+				<h:outputText value="#{zamowieniaListBB.odkiedy}" />
+		
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Msdsad" />
+				</f:facet>
+				<h:outputText value="#{zamowieniaListBB.dokiedy}" />
+		
+			</p:column>	
+			
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="model" />
+				</f:facet>
+				<h:outputText value="#{c.model}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="kolor" />
+				</f:facet>
+				<h:outputText value="#{c.color}" />
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Rocznik" />
+				</f:facet>
+				<h:outputText value="#{c.rocznik}" />
+			</p:column>
+				<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Zdjęcie" />
+				</f:facet>
+				<p:graphicImage value="#{c.photoName}" width="400px" height="200px"/>
+			</p:column>
+			
+			
+
+		</p:dataTable>
+	</p:panel>		
+	</h:form>
+		<h:form id="form-table1"  style="margin-bottom:1em;">
+			<p:panel header="Twoje Zamowienia" toggleable="true" collapsed="true" style="margin-bottom: 1em;">
+			
+			
+		<p:dataTable value="#{zamowieniaListBB.getUserList(remoteClient.details.ID_user)}" var="z" >
+
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Marka" />
+				</f:facet>
+				<h:outputText value="#{z.car.marka}" />
+				
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Model" />
+				</f:facet>
+				<h:outputText value="#{z.car.model}" />
+				
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Od kiedy" />
+				</f:facet>
+				<h:outputText value="#{z.odKiedy}" />
+				
+			</p:column>
+			
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Do kiedy" />
+				</f:facet>
+				<h:outputText value="#{z.doKiedy}" />
+				
+			</p:column>
+			<p:column priority="5">
+				<f:facet name="header">
+					<h:outputText value="Fota" />
+				</f:facet>
+				<p:graphicImage value="#{z.car.photoName}" width="400px" height="200px"/>
+				
+				
+			</p:column>
+			
+
+		</p:dataTable>
+		
+		</p:panel>	
+	</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -23,7 +23,7 @@ public class PersonListBB {
 	private static final String PAGE_STAY_AT_THE_SAME = null;
 
 	private String surname;
-		
+	
 	@Inject
 	ExternalContext extcontext;
 	
@@ -36,6 +36,7 @@ public class PersonListBB {
 	public String getSurname() {
 		return surname;
 	}
+	
 
 	public void setSurname(String surname) {
 		this.surname = surname;
@@ -57,7 +58,6 @@ public class PersonListBB {
 		
 		//2. Get list
 		list = personDAO.getList(searchParams);
-		
 		return list;
 	}
 

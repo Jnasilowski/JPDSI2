@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<p:panel toggleable="true" styleClass="tytul">
+		<h1>
+			<ui:insert name="title">...</ui:insert>
+		</h1>
+	</p:panel >
+	
+	<p:toolbar  >
+    	<f:facet name="left">
+    		
+    	</f:facet>
+   	 	<f:facet name="right">
+   	 			<h:form>
+   	 			<p:commandButton type="push" value="#{remoteClient.details.imie} "  />
+   	 		
+    			<p:commandButton type="push" value="Rejestracja" action="#{rejestracjaBB.doRejestr()}"/>
+    			<p:commandButton type="push" value="Logowanie" action="#{loginBB.doLogout()}" />
+    		</h:form>	
+   	 	
+   	 	
+   	 	</f:facet>
+   	 	
+	</p:toolbar>
+</ui:composition>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -10,13 +10,9 @@
     <f:viewAction action="#{personEditBB.onLoad()}" />
 </f:metadata>
 
-<h:head>
-	<meta charset="utf-8"/>
-	<title>JSF 06 - EJB, bazy danych (mapowanie
-		obiektowo-relacyjne)</title>
-</h:head>
+<ui:composition template="/templates/page-template.xhtml">
 
-<h:body style="background-color: #eee; margin: 0.5em;">
+	<ui:define name="pageContent">
 
 	<p:panel toggleable="true" header="Edycja rekordu">
 
@@ -58,6 +54,7 @@
 
 	</p:panel>
 
-</h:body>
+</ui:define>
 
+</ui:composition>
 </html>

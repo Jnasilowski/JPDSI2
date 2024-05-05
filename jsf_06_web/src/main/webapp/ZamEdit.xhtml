@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+    <f:viewAction action="#{carEditBB.onLoad()}" />
+</f:metadata>
+
+<ui:composition template="/templates/page-template.xhtml">
+
+	<ui:define name="pageContent">
+
+	<p:panel toggleable="true" header="Edycja rekordu">
+
+		<h:form rendered="#{carEditBB.car != null}">
+			<h:panelGrid columns="3" cellpadding="5">
+
+				<h:outputLabel for="p-marka" value="Marka:" />
+				<p:inputText id="p-marka" value="#{carEditBB.car.marka}"
+					required="true" requiredMessage="Podaj marke"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="p-marka" display="icon"/>
+
+				<h:outputLabel for="p-model" value="Model:" />
+				<p:inputText id="p-model" value="#{carEditBB.car.model}"
+					required="true" requiredMessage="podaj model"
+					validatorMessage="co najwyżej 40 znaków">
+					<f:validateLength maximum="40" />
+				</p:inputText>
+				<p:message for="p-model" display="icon"/>
+
+				<h:outputLabel for="p-kolor" value="Kolor:" />
+				<p:inputText id="p-kolor" value="#{carEditBB.car.color}"
+					required="true" requiredMessage="podaj kolor">
+					
+			    </p:inputText>
+				<p:message for="p-rocznik" display="icon"/>
+				<h:outputLabel for="p-rocznik" value="Rocznik:" />
+				<p:inputText id="p-rocznik" value="#{carEditBB.car.rocznik}"
+					required="true" requiredMessage="podaj rocznik">
+					
+			    </p:inputText>
+				<p:message for="p-photo" display="icon"/>
+				<h:outputLabel for="p-photo" value="Zdjecie:" />
+				<p:inputText id="p-photo" value="#{carEditBB.car.photoName}"
+					required="true" requiredMessage="podaj adres zdjecia">
+					
+			    </p:inputText>
+				<p:message for="p-photo" display="icon"/>
+			</h:panelGrid>
+
+			<p:messages id="msgs" />
+
+			<p:commandButton value="Zapisz" action="#{carEditBB.saveData()}"
+				style="margin-right: 1em;" update="@form" />
+
+			<p:button value="Anuluj" outcome="personList" />
+		</h:form>
+
+	</p:panel>
+
+</ui:define>
+
+</ui:composition>
+</html>
